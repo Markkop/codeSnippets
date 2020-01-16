@@ -33,7 +33,7 @@ const debounced = debounce(myfunc, 1000, false) // or
 const debounced = debounce(() => console.log('Hey'), 1000, false)
 
 // 2. Call it where you want to debounce
-debounced()
+document.addEventListener('click', debounced)
 jQuery(window).on('resize', debounced)
 
 // 3. Make sure you have declared your variables in the adequate scope,
