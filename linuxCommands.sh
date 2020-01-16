@@ -1,13 +1,12 @@
 #!/bin/sh
 
-# Extract .tar.xz content to /tmp folder
-# --x extract, --f filename, --v verbose
-tar -xvf file.tar.xz
+# Extract .tar.xz content to /tmp folder 
+# -x --extract, -v --verbose, -f --file -C --directory
+tar -xvf file.tar.xz -C /tmp
 
-# Extract .tar.gz content to /tmp folder 
-# --x extract, --f filename,  --v verbose, --z gzip
-tar -xfvz archive.tar.gz -C /tmp
-
+# Extract .tar.gz content 
+# -x --extract, -v --verbose, -f --file, -z --gzip
+tar -xvfz archive.tar.gz 
 # Set the computer to turn off at 21:45
 shutdown 21:45
 
