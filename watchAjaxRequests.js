@@ -1,4 +1,4 @@
-// Note: these typedefs migth have other properties
+// Note: these typedefs might have other properties
 
 /**
  * @typedef HTMLDocument
@@ -56,10 +56,7 @@
  */
 
 /**
- * Save cart items from the intercepted network response
- * in a window object .
- * This request can respond in two different ways, as described by
- * this function parameters.
+ * Intercepted network requests made with Ajax
  * For more information check: https://api.jquery.com/ajaxComplete/
  *
  * @param { Event  } event - contains the event object
