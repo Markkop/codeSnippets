@@ -10,7 +10,7 @@
 [...document.querySelectorAll('.r > a')].forEach((anchor) => {
   const title = anchor.querySelector('h3')
   const location = anchor.querySelector('div')
-	anchor.insertBefore(title, location)
+  anchor.insertBefore(title, location)
   
   const text = anchor.querySelector('cite')
   text.style.color = 'darkgreen'
