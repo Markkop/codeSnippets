@@ -32,7 +32,6 @@ const throttle = (func, limit) => {
  * Select and click in the loadMoreSubtasks element
  */
 const loadMoreSubtasks = () => {
-  console.log('a')
   const loadMoreElement = document.querySelector('.SubtaskGrid-loadMore')
   if(loadMoreElement) {
     loadMoreElement.click()
