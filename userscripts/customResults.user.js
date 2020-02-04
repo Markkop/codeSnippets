@@ -56,7 +56,7 @@ const removeResultArrow = () => {
  */
 const removeAdsResults = () => {
   const ads = [...document.querySelectorAll('.ads-ad')]
-  ads.forEach(ad => ad.remove())  
+  ads.forEach(ad => ad.style.display = 'none')  
 }
 
 /**
