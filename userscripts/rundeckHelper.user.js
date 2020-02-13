@@ -3,7 +3,7 @@
 // @namespace   Violentmonkey Scripts
 // @match       https://rundeck.chaordicsystems.com/*
 // @grant       none
-// @version     1.0
+// @version     1.1
 // @author      Marcelo "Mark" Kopmann
 // ==/UserScript==
 
@@ -40,10 +40,40 @@ const openOutput = () => {
   }
 }
 
+/**
+ * Open and downloads all jobs xml urls in the page
+ */
+const exportAllDefinitions = () => {
+  const jobLinks = document.querySelectorAll('.hover_show_job_info')
+  jobLinks.forEach(link => {
+    const xmlUrl = link.getAttribute('href') + '?format=xml'
+    window.open(xmlUrl)
+  })
+  
+}
+
+/**
+ * Add export all definitions button in the page
+ */ 
+const addExportAllButton = () => {
+  const pageButton = document.querySelector('#jobpageactionbuttons')
+  if (!pageButton) {
+    return
+  }
+  
+  const button = document.createElement('div')
+  button.innerText = 'Export All'
+  button.classList.add('btn', 'btn-default', 'btn-sm')
+  button.onclick = exportAllDefinitions
+  pageButton.appendChild(button)
+}
+
 /*
- * Add a throttled event listener to the page
+ * Run helper functions
  */
 (function asanaHelper() {
   document.addEventListener('mouseover', throttle(openOutput, 1000))
+  addExportAllButton()
 })()
+
 
