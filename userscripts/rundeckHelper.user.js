@@ -2,8 +2,9 @@
 // @name        RunDeck Helper
 // @namespace   Violentmonkey Scripts
 // @match       https://rundeck.chaordicsystems.com/*
+// @match       http://rundeck.core.linximpulse.net/*
 // @grant       none
-// @version     1.1
+// @version     1.2
 // @author      Marcelo "Mark" Kopmann
 // ==/UserScript==
 
@@ -30,17 +31,6 @@ const throttle = (func, limit) => {
 }
 
 /**
- * Select and click in the loadMoreSubtasks element
- */
-const openOutput = () => {
-  const outputTabElement = document.querySelector('#tab_link_output > a')
-  if(outputTabElement && !hasClicked) {
-    outputTabElement.click()
-    hasClicked = true
-  }
-}
-
-/**
  * Open and downloads all jobs xml urls in the page
  */
 const exportAllDefinitions = () => {
@@ -49,7 +39,6 @@ const exportAllDefinitions = () => {
     const xmlUrl = link.getAttribute('href') + '?format=xml'
     window.open(xmlUrl)
   })
-  
 }
 
 /**
@@ -68,12 +57,40 @@ const addExportAllButton = () => {
   pageButton.appendChild(button)
 }
 
+
+/**
+ * Click in the element
+ * @params { HTMLElement } element
+ * @returns { Function } element click
+ */
+const openOutput = element => {
+  return () => {
+    if (hasClicked) {
+      return
+    }
+    hasClicked = true
+    element.click()
+  }
+}
+
+
+/**
+ * Add an event listener to open output tab
+ */
+const autoClickOnOutput = () => {
+  const outputTabElement = document.querySelector('#tab_link_output > a') // Rundeck v2
+  const outputAnchorElement = document.querySelector("[href='#output']") // Rundeck v3
+  
+  const element = outputTabElement || outputAnchorElement
+  if (element) {
+    document.addEventListener('mouseover', throttle(openOutput(element), 1000))
+  }
+}
+
 /*
  * Run helper functions
  */
-(function asanaHelper() {
-  document.addEventListener('mouseover', throttle(openOutput, 1000))
+(function rundeckHelper() {
+  autoClickOnOutput()
   addExportAllButton()
 })()
-
-
