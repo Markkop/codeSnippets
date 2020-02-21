@@ -4,7 +4,7 @@
 // @match       https://rundeck.chaordicsystems.com/*
 // @match       http://rundeck.core.linximpulse.net/*
 // @grant       none
-// @version     1.2
+// @version     1.3
 // @author      Marcelo "Mark" Kopmann
 // ==/UserScript==
 
@@ -73,7 +73,6 @@ const openOutput = element => {
   }
 }
 
-
 /**
  * Add an event listener to open output tab
  */
@@ -87,10 +86,28 @@ const autoClickOnOutput = () => {
   }
 }
 
+/**
+ * Change the color of your favorite jobs
+ */
+const highligthFavorites = () => {
+  const favorites = [
+    'rotina-intersect',
+    'backend-intersect'
+  ]
+  const jobs = Array.from(document.querySelectorAll('a.text-primary'))
+  jobs.forEach(element => {
+    const name = element.innerText.trim()
+    if (favorites.includes(name)) {
+      element.style.color = 'orange'
+    }
+  })
+}
+
 /*
  * Run helper functions
  */
-(function rundeckHelper() {
+(function asanaHelper() {
   autoClickOnOutput()
   addExportAllButton()
+  highligthFavorites()
 })()
